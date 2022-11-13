@@ -3,6 +3,7 @@ package com.test.algorithm;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
@@ -17,8 +18,38 @@ class works {
     public static void main(String[] args) {
 //        newSingledPool();
        works works = new works();
-       works.newFixedPool();
+//       works.newFixedPool();
+       works.setQuene();
     }
+
+
+    public void setQuene(){
+        LinkedBlockingQueue<String> linkedBlockingQueue = new LinkedBlockingQueue<>();
+        linkedBlockingQueue.add("12345");
+        linkedBlockingQueue.add("12346");
+        linkedBlockingQueue.add("12347");
+        linkedBlockingQueue.add("12348");
+        linkedBlockingQueue.add("12349");
+
+
+        for (int i = 5; i < 10; i++) {
+            final int index = i;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println(new Date() + "===" + "1234"+i);
+            linkedBlockingQueue.remove("1234"+i);
+
+            System.out.println(new Date() + "===" + linkedBlockingQueue.size());
+
+        }
+
+
+    };
+
 
     public static void newCachedPool() {
 
